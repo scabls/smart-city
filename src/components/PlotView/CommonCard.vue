@@ -18,9 +18,10 @@ const { title } = defineProps({
 
 <style lang="scss" scoped>
 .card {
-  width: 20rem;
-  min-height: 18rem;
+  width: 18rem;
+  min-height: 10rem;
   color: #eee;
+  font-weight: 500;
   border-radius: 1rem;
   // overflow: hidden;
   // border: 1px solid #eee;
@@ -35,7 +36,7 @@ const { title } = defineProps({
   }
   .card-body {
     position: relative;
-    height: 16rem;
+    min-height: 8rem;
     margin-top: 0.5rem;
     background-image: linear-gradient(
       to right bottom,
