@@ -30,9 +30,9 @@ const renderChart = data => {
     maxColumnWidth: 20,
     color: ({ population }) => {
       if (population > 40000) return 'red'
-      else if (population > 30000) return 'yellow'
-      else if (population > 20000) return 'green'
-      else return 'blue'
+      else if (population > 30000) return 'orange'
+      else if (population > 20000) return 'yellow'
+      else return 'green'
     },
     legend: false,
     tooltip: {

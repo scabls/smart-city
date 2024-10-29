@@ -10,34 +10,29 @@ import { RoseChart } from '@opd/g2plot-vue'
 import { ref, onMounted } from 'vue'
 import { getBus } from '@/api/plot'
 
-const config = ref({})
-
-const renderChart = data => {
-  config.value = {
-    data,
-    xField: 'name',
-    yField: 'bus',
-    seriesField: 'name',
-    appendPadding: 10,
-    radius: 0.9,
-    label: {
-      offset: -15,
-    },
-    state: {
-      active: {
-        style: {
-          lineWidth: 0,
-          fillOpacity: 0.65,
-        },
+const config = ref({
+  xField: 'name',
+  yField: 'bus',
+  seriesField: 'name',
+  appendPadding: 10,
+  radius: 0.9,
+  label: {
+    offset: -15,
+  },
+  state: {
+    active: {
+      style: {
+        lineWidth: 0,
+        fillOpacity: 0.65,
       },
     },
-    interactions: [{ type: 'element-active' }],
-  }
-}
+  },
+  interactions: [{ type: 'element-active' }],
+})
 
 onMounted(async () => {
   const data = await getBus().then(res => res.area)
-  renderChart(data)
+  config.value.data = data
 })
 </script>
 

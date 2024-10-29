@@ -36,12 +36,12 @@ import UniversityCard from '@/components/PlotView/UniversityCard.vue'
   }
   .hospital-card {
     position: absolute;
-    top: 16.5rem;
+    top: 20.5rem;
     right: 3rem;
   }
   .university-card {
     position: absolute;
-    top: 27.5rem;
+    top: 31.5rem;
     right: 3rem;
   }
 }
