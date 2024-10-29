@@ -18,12 +18,9 @@ const { isRotating } = storeToRefs(useMapStore())
 
 const rotateEarth = () => {
   const center = map.getCenter()
-  center.lng += 100
-  map.easeTo({
-    center,
-    speed: 0.2,
-    easing: t => t,
-  })
+  // 旋转地球并考虑经度边界(-180, 180)
+  center.lng = ((center.lng + 180 + 0.1) % 360) - 180
+  map.setCenter(center)
   requestID = requestAnimationFrame(rotateEarth)
 }
 

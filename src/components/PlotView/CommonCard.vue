@@ -48,6 +48,8 @@ const { title } = defineProps({
     &::after {
       content: '';
       position: absolute;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 104%;
       background-image: url('@/assets/images/border.png');

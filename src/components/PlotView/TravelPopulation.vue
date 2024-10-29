@@ -1,28 +1,60 @@
 <template>
   <CommonCard title="武汉各区出行人口统计">
-    <div id="travel-chart"></div>
+    <ColumnChart v-bind="config" class="chart" />
   </CommonCard>
 </template>
 
 <script setup>
 import CommonCard from './CommonCard.vue'
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { getTravelPopulation } from '@/api/plot'
-import { Chart } from '@antv/g2'
+import { ColumnChart } from '@opd/g2plot-vue'
+
+const config = ref({})
+
+const renderChart = data => {
+  config.value = {
+    data,
+    autoFit: true,
+    appendPadding: [18, 0, 0, 0],
+    xField: 'name',
+    yField: 'population',
+    seriesField: 'population',
+    label: {
+      position: 'top',
+      style: {
+        fill: '#FFFFFF',
+        opacity: 0.6,
+      },
+    },
+
+    maxColumnWidth: 20,
+    color: ({ population }) => {
+      if (population > 40000) return 'red'
+      else if (population > 30000) return 'yellow'
+      else if (population > 20000) return 'green'
+      else return 'blue'
+    },
+    legend: false,
+    tooltip: {
+      field: 'population',
+      formatter: datum => {
+        return { name: '出行人口', value: datum.population }
+      },
+    },
+  }
+}
 
 onMounted(async () => {
   const data = await getTravelPopulation().then(res => res.area)
   console.log(data)
-
-  const chart = new Chart({
-    container: 'travel-chart',
-  })
+  renderChart(data)
 })
 </script>
 
 <style scoped>
-#travel-chart {
-  width: 100%;
-  height: 100%;
+.chart {
+  height: 13rem;
+  padding: 1rem;
 }
 </style>
