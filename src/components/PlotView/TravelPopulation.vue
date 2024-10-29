@@ -27,7 +27,6 @@ const renderChart = data => {
         opacity: 0.6,
       },
     },
-
     maxColumnWidth: 20,
     color: ({ population }) => {
       if (population > 40000) return 'red'
@@ -47,12 +46,11 @@ const renderChart = data => {
 
 onMounted(async () => {
   const data = await getTravelPopulation().then(res => res.area)
-  console.log(data)
   renderChart(data)
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .chart {
   height: 13rem;
   padding: 1rem;

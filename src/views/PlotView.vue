@@ -26,7 +26,7 @@ import UniversityCard from '@/components/PlotView/UniversityCard.vue'
   }
   .bus-card {
     position: absolute;
-    top: 20rem;
+    top: 23rem;
     left: 3rem;
   }
   .population-card {

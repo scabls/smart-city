@@ -27,7 +27,7 @@ export default [
         'area|5': [
           {
             name: '@county()',
-            bus: '@integer(10000, 50000)',
+            bus: '@integer(10, 40)',
           },
         ],
       })
@@ -40,10 +40,10 @@ export default [
     method: 'GET',
     handle: (req, res) => {
       const data = mockjs.mock({
-        'area|5': [
+        'area|4': [
           {
             name: '@county()',
-            population: '@integer(10000, 50000)',
+            population: '@integer(200, 400)',
           },
         ],
       })
