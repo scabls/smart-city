@@ -3,22 +3,47 @@
 </template>
 
 <script setup>
+import { onMounted, watch } from 'vue'
+import { useMapStore } from '@/stores/map'
+import { storeToRefs } from 'pinia'
 import mapboxgl from 'mapbox-gl'
 import { Scene, Mapbox } from '@antv/l7'
-import { onMounted } from 'vue'
 import useControl from '@/hooks/useControl'
 
 mapboxgl.accessToken = import.meta.env.VITE_TOKEN
 
+let map, scene, requestID
+
+const { isRotating } = storeToRefs(useMapStore())
+
+const rotateEarth = () => {
+  const center = map.getCenter()
+  center.lng += 100
+  map.easeTo({
+    center,
+    speed: 0.2,
+    easing: t => t,
+  })
+  requestID = requestAnimationFrame(rotateEarth)
+}
+
+watch(isRotating, () => {
+  if (isRotating.value) {
+    requestID = requestAnimationFrame(rotateEarth)
+  } else {
+    cancelAnimationFrame(requestID)
+  }
+})
+
 onMounted(() => {
-  const map = new mapboxgl.Map({
+  map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v11',
     center: [114.293, 30.588],
     zoom: 1,
     projection: 'globe',
   })
-  const scene = new Scene({
+  scene = new Scene({
     id: 'map',
     map: new Mapbox({
       mapInstance: map,

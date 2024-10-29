@@ -23,6 +23,9 @@ importers:
       mapbox-gl:
         specifier: ^3.7.0
         version: 3.7.0
+      pinia:
+        specifier: ^2.2.4
+        version: 2.2.4(vue@3.5.12)
       reset-css:
         specifier: ^5.0.2
         version: 5.0.2
@@ -1510,6 +1513,18 @@ packages:
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
+
+  pinia@2.2.4:
+    resolution: {integrity: sha512-K7ZhpMY9iJ9ShTC0cR2+PnxdQRuwVIsXDO/WIEV/RnMC/vmSoKDTKW/exNQYPI+4ij10UjXqdNiEHwn47McANQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
 
   pkg-types@1.2.1:
     resolution: {integrity: sha512-sQoqa8alT3nHjGuTjuKgOnvjo4cljkufdtLMnO2LBP/wRwuDlo1tkaEdMxCRhyGRPacv/ztlZgDPm2b7FAmEvw==}
@@ -3467,6 +3482,12 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
+
+  pinia@2.2.4(vue@3.5.12):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.12
+      vue-demi: 0.14.10(vue@3.5.12)
 
   pkg-types@1.2.1:
     dependencies:

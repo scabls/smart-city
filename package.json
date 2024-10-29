@@ -16,6 +16,7 @@
     "@mapbox/mapbox-gl-directions": "^4.3.1",
     "element-plus": "^2.8.6",
     "mapbox-gl": "^3.7.0",
+    "pinia": "^2.2.4",
     "reset-css": "^5.0.2",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"

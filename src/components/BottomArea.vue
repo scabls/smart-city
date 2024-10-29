@@ -1,7 +1,12 @@
 <template>
   <footer class="bottom-area">
     <div class="groups">
-      <span class="item" v-for="tab in tabs" :key="tab.text">
+      <span
+        class="item"
+        v-for="tab in tabs"
+        :key="tab.text"
+        @click="handleTabClick(tab.path)"
+      >
         <router-link :to="tab.path">
           <i :class="[tabClass(tab.icon), 'icon']"></i>
           <p class="text">{{ tab.text }}</p>
@@ -30,6 +35,11 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useMapStore } from '@/stores/map'
+import { storeToRefs } from 'pinia'
+
+const { isRotating } = storeToRefs(useMapStore())
+const { startRotate, stopRotate } = useMapStore()
 
 const tabs = ref([
   {
@@ -76,7 +86,20 @@ const measureTabs = ref([
     path: '/circle',
   },
 ])
+
 const tabClass = computed(() => icon => `iconfont ${icon}`)
+
+const handleTabClick = path => {
+  switch (path) {
+    case '/rotate':
+      if (isRotating.value) {
+        stopRotate()
+      } else {
+        startRotate()
+      }
+      break
+  }
+}
 </script>
 
 <style lang="scss" scoped>
