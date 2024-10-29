@@ -1,0 +1,32 @@
+.l7-control-container {
+  .l7-top {
+    &.l7-left {
+      &.l7-column {
+        margin-top: 5rem;
+      }
+    }
+    &.l7-right {
+      &.l7-column {
+        margin-top: 5rem;
+      }
+    }
+  }
+  .l7-bottom {
+    &.l7-left {
+      &.l7-row {
+        margin-bottom: 0.8rem;
+      }
+    }
+    &.l7-right {
+      &.l7-row {
+        margin-bottom: 0.8rem;
+      }
+    }
+  }
+}
+.mapboxgl-control-container {
+  .mapboxgl-ctrl-top-left {
+    margin-top: 5rem;
+    margin-left: 2.5rem;
+  }
+}
