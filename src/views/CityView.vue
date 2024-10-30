@@ -9,11 +9,8 @@ import { storeToRefs } from 'pinia'
 import { getBuildings, getRoads } from '@/api/city'
 import { CityBuildingLayer, LineLayer, LayerSwitch } from '@antv/l7'
 
-const { map, scene } = storeToRefs(useMapStore())
-
-const targetCenter = ref([114.3162, 30.5255])
-const targetZoom = ref(15)
-const targetPitch = ref(45)
+const { map, scene, targetCenter, targetZoom, targetPitch } =
+  storeToRefs(useMapStore())
 
 let buildingsLayer, roadsLayer, layerSwitch
 
@@ -30,6 +27,7 @@ onMounted(async () => {
 
   const buildingsData = await getBuildings()
   const roadsData = await getRoads()
+
   buildingsLayer = new CityBuildingLayer({ name: '建筑' })
     .source(buildingsData)
     .size('Elevation', h => h)

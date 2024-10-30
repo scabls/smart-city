@@ -5,6 +5,9 @@ export const useMapStore = defineStore('map', () => {
   const map = ref(null)
   const scene = ref(null)
   const isRotating = ref(false)
+  const targetCenter = ref([114.3162, 30.5255])
+  const targetZoom = ref(15)
+  const targetPitch = ref(45)
 
   const setMap = m => (map.value = m)
   const setScene = s => (scene.value = s)
@@ -15,6 +18,9 @@ export const useMapStore = defineStore('map', () => {
     map,
     scene,
     isRotating,
+    targetCenter,
+    targetZoom,
+    targetPitch,
     setMap,
     setScene,
     startRotate,

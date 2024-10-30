@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@antv/l7": "^2.22.1",
+    "@antv/l7-draw": "^3.1.5",
     "@antv/l7-maps": "^2.22.1",
     "@mapbox/mapbox-gl-directions": "^4.3.1",
     "@opd/g2plot-vue": "^3.6.10",
+    "@turf/turf": "^7.1.0",
     "axios": "^1.7.7",
     "element-plus": "^2.8.6",
     "json-server": "0.17.4",
