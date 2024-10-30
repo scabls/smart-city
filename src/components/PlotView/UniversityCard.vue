@@ -13,18 +13,21 @@
 import CommonCard from './CommonCard.vue'
 import { ref } from 'vue'
 
+import universityIcon from '@/assets/images/icons/学校.png'
+import studentIcon from '@/assets/images/icons/学生.png'
+
 const data = ref([
   {
     title: '高校',
     value: '130',
     quantifier: '家',
-    src: './icons/学校.png',
+    src: universityIcon,
   },
   {
     title: '在校大学生',
     value: '100',
     quantifier: '万',
-    src: './icons/学生.png',
+    src: studentIcon,
   },
 ])
 </script>

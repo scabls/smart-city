@@ -13,26 +13,30 @@
 import CommonCard from './CommonCard.vue'
 import { ref } from 'vue'
 
+import hospitalIcon from '@/assets/images/icons/医院.png'
+import hospitalBedIcon from '@/assets/images/icons/病床.png'
+import hospitalDepartmentIcon from '@/assets/images/icons/门诊.png'
+
 const data = ref([
   {
     title: '医院',
     value: '30',
     quantifier: '家',
-    src: './icons/医院.png',
+    src: hospitalIcon,
     size: 65,
   },
   {
     title: '门诊部',
     value: '300',
     quantifier: '个',
-    src: './icons/门诊.png',
+    src: hospitalDepartmentIcon,
     size: 40,
   },
   {
     title: '病床',
     value: '3000',
     quantifier: '张',
-    src: './icons/病床.png',
+    src: hospitalBedIcon,
     size: 50,
   },
 ])

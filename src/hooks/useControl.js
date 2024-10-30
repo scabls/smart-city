@@ -10,6 +10,11 @@ import {
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 
+import navigationDayV1Img from '@/assets/images/themes/navigation-day-v1.png'
+import navigationNightV1Img from '@/assets/images/themes/navigation-night-v1.png'
+import satelliteStreetsV12Img from '@/assets/images/themes/satellite-streets-v12.png'
+import satelliteV19Img from '@/assets/images/themes/satellite-v9.png'
+
 export default (scene, map) => {
   const zoom = new Zoom({
     position: 'topleft',
@@ -34,22 +39,22 @@ export default (scene, map) => {
       {
         text: '白天导航地图',
         value: 'mapbox://styles/mapbox/navigation-day-v1',
-        img: '/themes/navigation-day-v1.png',
+        img: navigationDayV1Img,
       },
       {
         text: '夜间导航地图',
         value: 'mapbox://styles/mapbox/navigation-night-v1',
-        img: '/themes/navigation-night-v1.png',
+        img: navigationNightV1Img,
       },
       {
         text: '标记卫星图',
         value: 'mapbox://styles/mapbox/satellite-streets-v12',
-        img: '/themes/satellite-streets-v12.png',
+        img: satelliteStreetsV12Img,
       },
       {
         text: '普通卫星图',
         value: 'mapbox://styles/mapbox/satellite-v9',
-        img: '/themes/satellite-v9.png',
+        img: satelliteV19Img,
       },
     ],
   })
