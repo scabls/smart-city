@@ -133,7 +133,30 @@ onUnmounted(() => {
     left: 20%;
     bottom: 90px;
     width: 60%;
+    background-color: transparent;
     z-index: 10;
+    cursor: pointer;
+    :deep(.el-table__inner-wrapper) {
+      .el-table__header-wrapper {
+        tr {
+          background-color: transparent;
+          .el-table__cell {
+            background-color: rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+      .el-table__body-wrapper {
+        .el-table__row {
+          background-color: rgba(0, 0, 0, 0.5);
+          color: white;
+          &:hover {
+            .el-table__cell {
+              background-color: rgba(0, 0, 0, 0.8);
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>

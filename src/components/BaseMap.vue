@@ -28,7 +28,7 @@ onMounted(() => {
     }),
     logoVisible: false,
   })
-  map.on('load', () => {
+  map.on('style.load', () => {
     fog()
   })
   map.on('move', () => {

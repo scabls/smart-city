@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useMapStore } from '@/stores/map'
 import { storeToRefs } from 'pinia'
 import { getBuildings, getRoads } from '@/api/city'
