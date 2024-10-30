@@ -7,16 +7,18 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useMapStore } from '@/stores/map'
 import { storeToRefs } from 'pinia'
 import { getBuildings, getRoads } from '@/api/city'
-import { CityBuildingLayer, LineLayer } from '@antv/l7'
+import { CityBuildingLayer, LineLayer, LayerSwitch } from '@antv/l7'
 
 const { map, scene } = storeToRefs(useMapStore())
 
-const center = map.value.getCenter()
-const zoom = map.value.getZoom()
-const pitch = map.value.getPitch()
 const targetCenter = ref([114.3162, 30.5255])
 const targetZoom = ref(15)
 const targetPitch = ref(45)
+
+let buildingsLayer, roadsLayer, layerSwitch
+
+const zoom = map.value.getZoom()
+const pitch = map.value.getPitch()
 
 onMounted(async () => {
   map.value.flyTo({
@@ -25,9 +27,10 @@ onMounted(async () => {
     zoom: targetZoom.value,
     pitch: targetPitch.value,
   })
+
   const buildingsData = await getBuildings()
   const roadsData = await getRoads()
-  const buildingsLayer = new CityBuildingLayer()
+  buildingsLayer = new CityBuildingLayer({ name: '建筑' })
     .source(buildingsData)
     .size('Elevation', h => h)
     .filter('Elevation', h => h >= 20)
@@ -46,7 +49,7 @@ onMounted(async () => {
         sweepSpeed: 0.5 /*扫光速度*/,
       },
     })
-  const roadsLayer = new LineLayer()
+  roadsLayer = new LineLayer({ name: '道路' })
     .source(roadsData)
     .shape('line')
     .size(1)
@@ -107,14 +110,23 @@ onMounted(async () => {
     })
   scene.value.addLayer(buildingsLayer)
   scene.value.addLayer(roadsLayer)
+
+  layerSwitch = new LayerSwitch({
+    layers: [buildingsLayer, roadsLayer],
+  })
+  scene.value.addControl(layerSwitch)
 })
 
 onUnmounted(() => {
   map.value.flyTo({
-    center,
     zoom,
     pitch,
   })
+
+  scene.value.removeLayer(buildingsLayer)
+  scene.value.removeLayer(roadsLayer)
+
+  scene.value.removeControl(layerSwitch)
 })
 </script>
 
