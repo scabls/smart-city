@@ -3,44 +3,25 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 import { useMapStore } from '@/stores/map'
-import { storeToRefs } from 'pinia'
 import mapboxgl from 'mapbox-gl'
 import { Scene, Mapbox } from '@antv/l7'
 import useControl from '@/hooks/useControl'
 
 mapboxgl.accessToken = import.meta.env.VITE_TOKEN
 
-let map, scene, requestID
-
-const { isRotating } = storeToRefs(useMapStore())
-
-const rotateEarth = () => {
-  const center = map.getCenter()
-  // 旋转地球并考虑经度边界(-180, 180)
-  center.lng = ((center.lng + 180 + 0.1) % 360) - 180
-  map.setCenter(center)
-  requestID = requestAnimationFrame(rotateEarth)
-}
-
-watch(isRotating, () => {
-  if (isRotating.value) {
-    requestID = requestAnimationFrame(rotateEarth)
-  } else {
-    cancelAnimationFrame(requestID)
-  }
-})
+const { setMap, setScene } = useMapStore()
 
 onMounted(() => {
-  map = new mapboxgl.Map({
+  const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v11',
     center: [114.293, 30.588],
     zoom: 1,
     projection: 'globe',
   })
-  scene = new Scene({
+  const scene = new Scene({
     id: 'map',
     map: new Mapbox({
       mapInstance: map,
@@ -66,6 +47,8 @@ onMounted(() => {
       'high-color': `hsl(0, 0%, ${Math.abs(center.lng) / 360})`,
     })
   }
+  setMap(map)
+  setScene(scene)
 })
 </script>
 

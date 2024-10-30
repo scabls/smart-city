@@ -1,7 +1,5 @@
 import mockjs from 'mockjs'
 
-// 统一设置响应头
-
 export default [
   {
     pattern: '/api/travelPopulation',
