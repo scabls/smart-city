@@ -1,4 +1,4 @@
-import request from './request'
+import request from './request-mock'
 
 const getTravelPopulation = () => request.get('/travelPopulation')
 
