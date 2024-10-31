@@ -6,7 +6,7 @@ export const useMapStore = defineStore('map', () => {
   const scene = ref(null)
   const isRotating = ref(false)
   const targetCenter = ref([114.3162, 30.5255])
-  const targetZoom = ref(15)
+  const targetZoom = ref(14)
   const targetPitch = ref(45)
 
   const setMap = m => (map.value = m)
