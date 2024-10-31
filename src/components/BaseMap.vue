@@ -30,12 +30,14 @@ onMounted(() => {
   })
   map.on('style.load', () => {
     fog()
+    setMap(map) //map加载完成后，将map实例存入mapStore
   })
   map.on('move', () => {
     fog()
   })
   scene.on('loaded', () => {
     useControl(scene, map)
+    setScene(scene) //scene加载完成后，将scene实例存入mapStore
   })
   const fog = () => {
     const center = map.getCenter()
@@ -47,8 +49,6 @@ onMounted(() => {
       'high-color': `hsl(0, 0%, ${Math.abs(center.lng) / 360})`,
     })
   }
-  setMap(map)
-  setScene(scene)
 })
 </script>
 

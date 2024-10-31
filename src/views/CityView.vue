@@ -14,9 +14,6 @@ const { map, scene, targetCenter, targetZoom, targetPitch } =
 
 let buildingsLayer, roadsLayer, layerSwitch
 
-const zoom = map.value.getZoom()
-const pitch = map.value.getPitch()
-
 onMounted(async () => {
   map.value.flyTo({
     // 武汉
@@ -30,8 +27,8 @@ onMounted(async () => {
 
   buildingsLayer = new CityBuildingLayer({ name: '建筑' })
     .source(buildingsData)
-    .size('Elevation', h => h)
-    .filter('Elevation', h => h >= 20)
+    .size('Elevation') //映射Elevation字段的值作为size, 等价于size('Elevation', h => h)
+    .filter('Elevation', h => h >= 20) //根据Elevation字段的值过滤数据
     .active(true)
     .animate(true)
     .style({

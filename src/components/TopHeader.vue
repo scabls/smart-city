@@ -9,17 +9,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const date = ref('')
-const time = ref('')
-setInterval(() => {
-  const now = new Date()
-  date.value = `${now.getFullYear()}-${addZero(now.getMonth() + 1)}-${addZero(now.getDate())}`
-  time.value = `${addZero(now.getHours())}:${addZero(now.getMinutes())}:${addZero(
-    now.getSeconds(),
-  )}`
-}, 1000)
+import { ref, computed } from 'vue'
+
+const now = ref(new Date())
+
+const date = computed(
+  () =>
+    `${now.value.getFullYear()}-${addZero(now.value.getMonth() + 1)}-${addZero(now.value.getDate())}`,
+)
+const time = computed(
+  () =>
+    `${addZero(now.value.getHours())}:${addZero(now.value.getMinutes())}:${addZero(
+      now.value.getSeconds(),
+    )}`,
+)
+
 const addZero = num => num.toString().padStart(2, '0')
+
+setInterval(() => {
+  now.value = new Date()
+}, 1000)
 </script>
 
 <style lang="scss" scoped>

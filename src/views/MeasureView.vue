@@ -60,7 +60,7 @@ onBeforeRouteUpdate(to => {
   initDrawer(to.params.type)
 })
 onUnmounted(() => {
-  if (drawer) drawer.destroy()
+  if (drawer) drawer.destroy() //当draw实例存在时销毁实例,防止bug
 })
 </script>
 

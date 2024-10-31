@@ -71,7 +71,6 @@ const handleRowClick = ({ center }) => {
     zoom: 18,
     pitch: 0,
   })
-  isDrawing.value = false
   draw.clear()
   draw.disable()
 }
@@ -82,19 +81,18 @@ onMounted(async () => {
     zoom: targetZoom.value,
     pitch: targetPitch.value,
   })
+  const data = await getEvents() //获取数据, 获取数据之后再执行功能的实现
   scene.value.addControl(drawControl)
-  const data = await getEvents()
   draw.on(DrawEvent.Add, feature => {
-    renderLayer(feature)
+    renderLayer(feature) //获取到绘制的图层, 根据绘制图层筛选点数据并渲染
   })
-  draw.on(DrawEvent.DragEnd, feature => {
-    const index = layers.findIndex(layer => layer.id === feature.properties.id)
-    scene.value.removeLayer(layers[index].pointLayer)
-    layers.splice(index, 1)
-    renderLayer(feature)
+  draw.on(DrawEvent.Edit, feature => {
+    clearRecords(feature) //清除之前的绘制范围内的点数据和表格内的记录
+    renderLayer(feature) //重新渲染当前绘制筛选出的点图层
   })
   const renderLayer = feature => {
-    const points = pointsWithinPolygon(data, feature)
+    const drawId = feature.properties.id //获取本次draw的feature的id
+    const points = pointsWithinPolygon(data, feature) //根据绘制的矩形范围筛选出数据
     const pointLayer = new PointLayer({ name: `交通事故${Date.now()}` })
       .source(points)
       .shape('circle')
@@ -103,13 +101,25 @@ onMounted(async () => {
       .color('#ffa842')
       .active(true)
     scene.value.addLayer(pointLayer)
-    layers.push({ id: feature.properties.id, pointLayer })
-    tableData.value.push(
-      ...points.features.map(f => ({
+    layers.push({ drawId, pointLayer }) //存储绘制id和筛选出的点图层,方便在拖动draw图层时移除并重新筛选
+    points.features
+      .map(f => ({
         ...f.properties,
         center: f.geometry.coordinates,
-      })),
-    )
+        drawId, //给表格记录的点数据添加drawId属性, 方便在拖动draw图层时更新表格记录的当前范围内的点数据
+      }))
+      .forEach(item => {
+        if (tableData.value.some(d => d.id === item.id)) return
+        tableData.value.push(item)
+      }) //将筛选出的点数据格式化后添加到表格数据中, 并保证表格数据不重复
+  }
+  const clearRecords = feature => {
+    const drawId = feature.properties.id //获取拖动的draw图层的id
+    const index = layers.findIndex(layer => layer.drawId === drawId) //根据绘制id找到之前筛选并渲染的点图层
+    if (index === -1) return //如果没有找到对应的点图层, 则直接返回
+    scene.value.removeLayer(layers[index].pointLayer) //在scene中移除找到的点图层
+    layers.splice(index, 1) //移除点图层在数组中的记录
+    tableData.value = tableData.value.filter(d => d.drawId !== drawId) //要保证表格数据只包含绘制范围内的点, 所以移除draw图层上次筛选范围内的表格数据
   }
 })
 onUnmounted(() => {

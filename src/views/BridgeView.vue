@@ -41,11 +41,11 @@ onMounted(async () => {
     items: [
       {
         layer: bridgeLayer,
-        title: f => f.name,
+        title: f => f.name, // 将feature的name属性作为popup的标题
         fields: [
           {
             field: 'info',
-            formatField: () => '桥梁信息',
+            formatField: '桥梁信息', //等价于 ()=>'桥梁信息'
           },
         ],
       },
