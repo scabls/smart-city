@@ -14,9 +14,6 @@ const { map, scene, targetCenter, targetZoom, targetPitch } =
 
 let bridgeLayer, popupLayer
 
-const zoom = map.value.getZoom()
-const pitch = map.value.getPitch()
-
 onMounted(async () => {
   map.value.flyTo({
     center: targetCenter.value,
