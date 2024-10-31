@@ -116,11 +116,6 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  map.value.flyTo({
-    zoom,
-    pitch,
-  })
-
   scene.value.removeLayer(buildingsLayer)
   scene.value.removeLayer(roadsLayer)
 

@@ -40,9 +40,6 @@ const isDrawing = ref(false)
 
 const layers = []
 
-const zoom = map.value.getZoom()
-const pitch = map.value.getPitch()
-
 const draw = new DrawRect(scene.value, {})
 const drawControl = new Control()
 
@@ -116,10 +113,6 @@ onMounted(async () => {
   }
 })
 onUnmounted(() => {
-  map.value.flyTo({
-    zoom,
-    pitch,
-  })
   scene.value.removeControl(drawControl)
   removePreviousLayer()
   draw.destroy()

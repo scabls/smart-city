@@ -70,16 +70,16 @@ const tabs = ref([
 ])
 const measureTabs = ref([
   {
-    icon: 'icon-line',
-    path: '/line',
-  },
-  {
     icon: 'icon-zhexiantu',
     path: '/polyline',
   },
   {
     icon: 'icon-juxing',
     path: '/rectangle',
+  },
+  {
+    icon: 'icon-huaduobianxing',
+    path: '/polygon',
   },
   {
     icon: 'icon-xingzhuang-tuoyuanxing',
@@ -103,7 +103,7 @@ const handleTabClick = path => {
 </script>
 
 <style lang="scss" scoped>
-@import '//at.alicdn.com/t/c/font_4725884_2wuqhpt2bmu.css';
+@import '//at.alicdn.com/t/c/font_4725884_2s0b4jshy69.css';
 .bottom-area {
   position: fixed;
   bottom: 0;

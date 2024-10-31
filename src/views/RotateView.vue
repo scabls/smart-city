@@ -30,6 +30,10 @@ watch(isRotating, () => {
 
 onMounted(() => {
   startRotate()
+  map.value.flyTo({
+    zoom: 1,
+    pitch: 0,
+  })
 })
 onUnmounted(() => {
   stopRotate()
